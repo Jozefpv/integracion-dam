@@ -1,0 +1,19 @@
+.test {
+  display: block;
+  width: 400px;
+  border-radius: 10px;
+  height: 300px;
+}
+
+.containerApartment{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  transition: transform .2s;
+}
+
+.containerApartment:hover {
+  transform: scale(1.05);
+}

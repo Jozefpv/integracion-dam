@@ -1,0 +1,26 @@
+.videoContainer {
+    height: 70vh;
+    width: 100%;
+    overflow: hidden;
+    padding: 0%;
+    margin-top: 0;
+  }
+  
+  .videoContainer video {
+    min-width: 100%;
+    min-height: 100%;
+  }
+  
+  .video {
+    position: relative;
+    width: 100%;
+  }
+  
+  .divTapa{
+    position: absolute;
+    background-color: black;
+    opacity: 50%;
+    z-index: 5;
+    min-width: 100%;
+    min-height: 70%;
+  }

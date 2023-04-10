@@ -1,0 +1,19 @@
+.carruselContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 600px;
+}
+
+.carousel-item img {
+  max-width: 600px;
+  max-height: 400px;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+.carousel-img {
+    width: 600px;
+    height: 300px;
+    border-radius: 10px;
+  }

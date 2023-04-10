@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500&display=swap');
+
+.textSectionFont{
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 20px;
+    align-content: center;
+    justify-content: center;
+    text-align: justify;
+}
+
+h3{
+    text-align: center;
+}
+

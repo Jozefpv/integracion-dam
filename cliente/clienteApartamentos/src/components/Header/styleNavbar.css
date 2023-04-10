@@ -1,0 +1,10 @@
+.linkNavbar{
+  text-decoration: none;
+  color: rgb(93, 93, 93);
+  transition: 0.5s color;
+  font-weight: bold;
+}
+
+.linkNavbar:hover{
+  color: white;  
+}

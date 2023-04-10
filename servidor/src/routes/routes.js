@@ -9,11 +9,11 @@ router.get('/', async (req, res) => {
 
 router.get('/apartamentos/:id', async (req, res) => {
     try {
-      const apartamento = await Apartamento.findById(req.params.id).populate('reservas')
-      res.status(200).json(apartamento)
+        const apartamento = await Apartamento.findById(req.params.id).populate('reservas')
+        res.status(200).json(apartamento)
     } catch (error) {
-      console.error(error)
-      res.status(500).json({ mensaje: 'Error al obtener las reservas' })
+        console.error(error)
+        res.status(500).json({ mensaje: 'Error al obtener las reservas' })
     }
 })
 
@@ -37,7 +37,6 @@ router.post('/apartamentos/:id/reservas', async (req, res) => {
         const reservas = apartamento.reservas
         const fechas = reservas.map(e => console.log("--", e.fecha_inicio))
 
-        // Crear la reserva y asignarla al apartamento
         const reserva = new Reserva({
             id_reserva: req.body.id_reserva,
             fecha_inicio: req.body.fecha_inicio,
@@ -51,15 +50,14 @@ router.post('/apartamentos/:id/reservas', async (req, res) => {
         })
         apartamento.reservas.push(reserva)
 
-        // Guardar la reserva y el apartamento actualizados en la base de datos
         await reserva.save()
         await apartamento.save()
 
-        // Enviar la respuesta al cliente
         res.status(201).json(reserva)
     } catch (error) {
         console.error(error)
         res.status(500).json({ mensaje: 'Error al crear la reserva' })
-    }})
+    }
+})
 
 module.exports = router

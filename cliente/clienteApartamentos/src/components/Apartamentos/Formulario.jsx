@@ -49,7 +49,7 @@ const Formulario = (props) => {
               }
             );
             const reserva = await response.json();
-            console.log(reserva);
+            console.log(reserva.mensaje);
           } catch (error) {
             console.error(error);
           }

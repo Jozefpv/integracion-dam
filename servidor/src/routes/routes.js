@@ -11,7 +11,21 @@ router.get('/', async (req, res) => {
 router.get('/apartamentos/:id', async (req, res) => {
     try {
         const apartamento = await Apartamento.findById(req.params.id).populate('reservas')
-        res.status(200).json(apartamento)
+        const fechasReservas = []
+
+        apartamento.reservas.forEach((reserva) => {
+            const fechaInicio = moment(reserva.fecha_inicio)
+            const fechaFin = moment(reserva.fecha_fin)
+            const diffDays = fechaFin.diff(fechaInicio, 'days')
+            for (let i = 0; i <= diffDays; i++) {
+                fechasReservas.push(moment(fechaInicio).add(i, 'days').format('YYYY-MM-DD'))
+            }
+        })
+
+        res.status(200).json({
+            apartamento: apartamento,
+            fechasReservas: fechasReservas
+        })
     } catch (error) {
         console.error(error)
         res.status(500).json({ mensaje: 'Error al obtener las reservas' })
@@ -27,7 +41,6 @@ router.post('/', async (req, res) => {
         num_personas_max: req.body.num_personas_max
     })
     await apartamentos.save()
-
     res.json({ status: 'Apartamento guardado' })
 
 })
@@ -36,52 +49,23 @@ router.post('/apartamentos/:id/reservas', async (req, res) => {
     try {
         const apartamento = await Apartamento.findById(req.params.id).populate('reservas')
         const reservas = apartamento.reservas
-
-        const fechaInicioRecibida = moment(req.body.fecha_inicio);
-        const fechaFinRecibida = moment(req.body.fecha_fin);
-
-        let seSolapan = false;
-
-        reservas.forEach(reserva => {
-            const reservaInicio = moment(reserva.fecha_inicio);
-            const reservaFin = moment(reserva.fecha_fin);
-
-            if (fechaInicioRecibida.isBetween(reservaInicio, reservaFin, undefined, '[]')
-                || fechaFinRecibida.isBetween(reservaInicio, reservaFin, undefined, '[]')
-                || reservaInicio.isBetween(fechaInicioRecibida, fechaFinRecibida, undefined, '[]')
-                || reservaFin.isBetween(fechaInicioRecibida, fechaFinRecibida, undefined, '[]')) {
-                seSolapan = true;
+        const reserva = new Reserva({
+            id_reserva: req.body.id_reserva,
+            fecha_inicio: req.body.fecha_inicio,
+            fecha_fin: req.body.fecha_fin,
+            cliente: {
+                nombre: req.body.cliente.nombre,
+                apellido: req.body.cliente.apellido,
+                email: req.body.cliente.email,
+                telefono: req.body.cliente.telefono
             }
         })
+        res.status(200).json({ mensaje: 'reservado' })
 
-        if (seSolapan) {
-            console.log("si se solapan")
-            res.status(409).json({ mensaje: 'Se solapa con alguna reserva' })
-        }else{
-            console.log("no se solapan")
-            res.status(201).json({ mensaje: 'NO SE solapa con alguna reserva' })
-            const reserva = new Reserva({
-                id_reserva: req.body.id_reserva,
-                fecha_inicio: req.body.fecha_inicio,
-                fecha_fin: req.body.fecha_fin,
-                cliente: {
-                    nombre: req.body.cliente.nombre,
-                    apellido: req.body.cliente.apellido,
-                    email: req.body.cliente.email,
-                    telefono: req.body.cliente.telefono
-                }
-            })
-            apartamento.reservas.push(reserva)
-    
-            await reserva.save()
-            await apartamento.save()
-        }
+        // apartamento.reservas.push(reserva)
 
-
-
-       
-
-        
+        // await reserva.save()
+        // await apartamento.save()
     } catch (error) {
         console.error(error)
         res.status(500).json({ mensaje: 'Error al crear la reserva' })

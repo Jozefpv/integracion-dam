@@ -2,7 +2,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import DatePicker from 'react-datepicker';
 import { useState } from 'react';
-import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styletest.css'
 
@@ -14,13 +13,8 @@ const Formulario = (props) => {
     const [fechaEntrada, setFechaEntrada] = useState(null);
     const [fechaSalida, setFechaSalida] = useState(null);
 
-    const handleFechaEntradaChange = (date) => {
-        setFechaEntrada(date);
-    }
-
-    const handleFechaSalidaChange = (date) => {
-        setFechaSalida(date);
-    }
+    const excludeDates = []
+    props.fechas.map(item => excludeDates.push(new Date(item)))
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,35 +23,40 @@ const Formulario = (props) => {
             fecha_inicio: fechaEntrada,
             fecha_fin: fechaSalida,
             cliente: {
-              nombre: nombre,
-              apellido: apellidos,
-              email: email,
-              telefono: telefono
+                nombre: nombre,
+                apellido: apellidos,
+                email: email,
+                telefono: telefono
             }
-          }
-          console.log(props.id)
-
-          try {
+        }
+        
+        try {
             const response = await fetch(
-              `http://localhost:3003/apartamentos/${props.id}/reservas`,
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-              }
+                `http://localhost:3003/apartamentos/${props.id}/reservas`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }
             );
             const reserva = await response.json();
-            console.log(reserva.mensaje);
-          } catch (error) {
-            console.error(error);
-          }
+            console.log(reserva)
+            setNombre('')
+            setApellidos('')
+            setEmail('')
+            setTelefono('')
+            setFechaEntrada(null)
+            setFechaSalida(null)
 
-    };
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
-        <Form style={{width: '40%' }} onSubmit={handleSubmit}>
+        <Form style={{ width: '40%' }} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicNombre">
                 <Form.Label>Nombre:</Form.Label>
                 <Form.Control required type="text" placeholder="Nombre..." value={nombre} onChange={(event) => setNombre(event.target.value)} />
@@ -79,10 +78,11 @@ const Formulario = (props) => {
                 <DatePicker
                     className='testform'
                     selected={fechaEntrada}
-                    onChange={handleFechaEntradaChange}
+                    onChange={e => setFechaEntrada(e)}
                     selectsStart
                     startDate={fechaEntrada}
                     endDate={fechaSalida}
+                    excludeDates={excludeDates}
                     dateFormat="dd/MM/yyyy"
                     placeholderText="Selecciona una fecha"
                 />
@@ -92,10 +92,11 @@ const Formulario = (props) => {
                 <DatePicker
                     className='testform'
                     selected={fechaSalida}
-                    onChange={handleFechaSalidaChange}
+                    onChange={e => setFechaSalida(e)}
                     selectsEnd
                     startDate={fechaEntrada}
                     endDate={fechaSalida}
+                    excludeDates={excludeDates}
                     dateFormat="dd/MM/yyyy"
                     placeholderText="Selecciona una fecha"
                 />
@@ -104,6 +105,7 @@ const Formulario = (props) => {
                 Reservar
             </Button>
         </Form>
+
     )
 }
 

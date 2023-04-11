@@ -7,6 +7,7 @@ import Formulario from "./Formulario";
 
 const ApartmentDetail = () => {
     const [informacion, setInformacion] = useState()
+    const [fechas, setFechas] = useState()
     const [index, setIndex] = useState(0)
     const { id } = useParams()
     const handleSelect = (selectedIndex, e) => {
@@ -16,8 +17,14 @@ const ApartmentDetail = () => {
     useEffect(() => {
         fetch(`http://localhost:3003/apartamentos/${id}`)
             .then(res => res.json())
-            .then(data => setInformacion(data))
+            .then(data => {
+                setInformacion(data.apartamento)
+                setFechas(data.fechasReservas)
+            })
     }, [])
+
+
+
 
     return (
         <div style={{ padding: '3%' }}>
@@ -43,8 +50,8 @@ const ApartmentDetail = () => {
                         </div>
                     </div>
 
-                    <Formulario id={id}/>
-
+                    <Formulario id={id} fechas={fechas}/>
+                    
 
 
                 </div>

@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500&display=swap');
+
+.footerTextCopyright{
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 18px;
+}
+.iconFooterContainer{
+    border: 2px solid black;
+    border-radius: 8rem;
+    padding: 8px;
+    transition: 0.2s;
+}
+
+.iconFooterContainer:hover{
+    transform: scale(1.1);
+}

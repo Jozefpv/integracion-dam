@@ -21,6 +21,7 @@ const apartamentoSchema = new Schema({
     precio_noche: { type: Number, required: true },
     descripcion: { type: String },
     num_personas_max: { type: Number, required: true },
+    likes: {type: Number, required: true},
     reservas: [{ type: Schema.Types.ObjectId, ref: 'Reserva' }]
 })
 

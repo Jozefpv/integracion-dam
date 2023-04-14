@@ -10,14 +10,14 @@ const SectionDetail = () => {
         <Container
             style={{
                 minWidth: "100%",
-                height: "70vh",
+                height: "100%",
                 backgroundImage: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(204,204,204,1) 100%, rgba(216,225,227,1) 100%)",
                 backgroundColor: "rgb(255, 255, 255)",
                 backgroundRepeat: "repeat",
                 backgroundSize: "cover",
             }}
         >
-            <Row style={{height:"100%"}}>
+            <Row style={{height:"100%", padding:"40px 10px"}}>
                 <Col sm={12} md={5}>
                     <ImageSection />
                 </Col>

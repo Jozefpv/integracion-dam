@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap');
+
+.titleRecomendadas{
+    font-family: 'Exo 2', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+

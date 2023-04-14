@@ -1,6 +1,8 @@
 import './styleApartment.css'
 import { FaUser } from 'react-icons/fa';
 import { MdNightlight } from 'react-icons/md';
+import { AiFillHeart } from 'react-icons/ai';
+
 
 
 const Apartment = (props) => {
@@ -16,7 +18,8 @@ const Apartment = (props) => {
                     <p style={{ marginTop:'15px'}}>{props.info.num_personas_max} personas</p>
                     <MdNightlight size={15} style={{marginLeft:'20px'}} />
                     <p style={{ marginTop:'15px'}}>{props.info.precio_noche}€ /noche </p>
-
+                    <AiFillHeart size={15} style={{marginLeft:'20px'}} />
+                    <p style={{ marginTop:'15px'}}>{props.info.likes} </p>
                 </div>
             </div>
         </div>

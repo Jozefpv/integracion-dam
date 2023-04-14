@@ -38,11 +38,36 @@ router.post('/', async (req, res) => {
         direccion: req.body.direccion,
         precio_noche: req.body.precio_noche,
         descripcion: req.body.descripcion,
-        num_personas_max: req.body.num_personas_max
+        num_personas_max: req.body.num_personas_max,
+        likes: req.body.likes
     })
     await apartamentos.save()
     res.json({ status: 'Apartamento guardado' })
 
+})
+
+router.post('/apartamentos/:id/addlike', async(req, res) => {
+    try {
+        const apartamento = await Apartamento.findById(req.params.id)
+        apartamento.likes++
+        await apartamento.save()    
+        res.json({ message: 'Like actualizado correctamente', apartamento });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al actualizar el like' });
+    }
+})
+
+router.post('/apartamentos/:id/removelike', async(req, res) => {
+    try {
+        const apartamento = await Apartamento.findById(req.params.id)
+        if(apartamento.likes>0){
+            apartamento.likes--
+            await apartamento.save()
+        }
+        res.json({ message: 'Like decrementado correctamente', apartamento})
+    } catch (error) {
+        res.status(500).json({ message: 'Error al actualizar el like'})
+    }
 })
 
 router.post('/apartamentos/:id/reservas', async (req, res) => {
@@ -60,12 +85,13 @@ router.post('/apartamentos/:id/reservas', async (req, res) => {
                 telefono: req.body.cliente.telefono
             }
         })
+        
+
+        apartamento.reservas.push(reserva)
+
+        await reserva.save()
+        await apartamento.save()
         res.status(200).json({ mensaje: 'reservado' })
-
-        // apartamento.reservas.push(reserva)
-
-        // await reserva.save()
-        // await apartamento.save()
     } catch (error) {
         console.error(error)
         res.status(500).json({ mensaje: 'Error al crear la reserva' })

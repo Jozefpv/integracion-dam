@@ -7,7 +7,7 @@ const Footer = () => {
         <Container
             style={{
                 minWidth: "100%",
-                height: "20vh",
+                height: "30vh",
                 backgroundImage: "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(204,204,204,1) 100%, rgba(216,225,227,1) 100%)",
                 backgroundColor: "rgb(255, 255, 255)",
                 backgroundRepeat: "repeat",

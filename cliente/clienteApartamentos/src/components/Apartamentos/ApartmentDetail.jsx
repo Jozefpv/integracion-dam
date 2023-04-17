@@ -34,7 +34,7 @@ const ApartmentDetail = () => {
 
     const clickDecrementarLikes = async () => {
         setLike(false)
-        const data = { }
+        const data = {}
         try {
             const response = await fetch(
                 `http://localhost:3003/apartamentos/${id}/removelike`,
@@ -106,7 +106,10 @@ const ApartmentDetail = () => {
 
                             </div>
                         </div>
-                        <Formulario id={id} fechas={fechas} />
+                        <div style={{display:"flex", flexDirection:"column", width:"100%"}}>
+                            <h3 style={{textAlign:"left"}}>Haz tu reserva</h3>
+                            <Formulario id={id} fechas={fechas} apartamento={informacion.nombre} />
+                        </div>
                     </div>
                     <div style={{ width: "100%" }}>
                         <h5 style={{ textAlign: "center" }}>posibles reseñas</h5>

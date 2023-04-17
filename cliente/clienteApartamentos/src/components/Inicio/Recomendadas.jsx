@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import imagenes from "./data/imagenes"
 import Apartment from "../Apartamentos/Apartment"
 import { Link } from "react-router-dom"
+import uniqid from 'uniqid';
+
 const Recomendadas = () => {
 
     const [apartment, setApartment] = useState([])
@@ -49,7 +51,7 @@ const Recomendadas = () => {
                 <div style={{backgroundColor: '', height: '100%', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', padding: '15px', justifyContent: 'center', gap:"30px"}}>
                     {apartment.map((item) => {
                         return (
-                            <div>
+                            <div key={uniqid()}>
                                 <Link to={`/apartamentos/${item._id}`} style={{ textDecoration: 'none', cursor: 'pointer', color: 'black', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                                     <Apartment foto={imagenes[item._id]} info={item} />
                                 </Link>

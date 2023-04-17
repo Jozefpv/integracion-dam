@@ -85,12 +85,11 @@ router.post('/apartamentos/:id/reservas', async (req, res) => {
                 telefono: req.body.cliente.telefono
             }
         })
-        
-
         apartamento.reservas.push(reserva)
 
         await reserva.save()
         await apartamento.save()
+        
         res.status(200).json({ mensaje: 'reservado' })
     } catch (error) {
         console.error(error)

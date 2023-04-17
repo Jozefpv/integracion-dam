@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styletest.css'
+import emailjs from '@emailjs/browser';
 
 const Formulario = (props) => {
     const [nombre, setNombre] = useState('');
@@ -29,7 +30,7 @@ const Formulario = (props) => {
                 telefono: telefono
             }
         }
-        
+
         try {
             const response = await fetch(
                 `http://localhost:3003/apartamentos/${props.id}/reservas`,
@@ -43,6 +44,24 @@ const Formulario = (props) => {
             );
             const reserva = await response.json();
             console.log(reserva)
+
+            console.log(props.apartamento)
+
+            const templateParams = {
+                email: email,
+                apartamento: props.apartamento,
+                fecha_entrada: fechaEntrada.toLocaleDateString(),
+                fecha_salida: fechaSalida.toLocaleDateString(),
+                nombre: nombre
+            };
+            const emailjsResponse = await emailjs.send(
+                'service_f7bvo1g',
+                'template_ubo6jhh',
+                templateParams,
+                'sM-duookX9T8Am2ll'
+            );
+            console.log(emailjsResponse)
+
             setNombre('')
             setApellidos('')
             setEmail('')

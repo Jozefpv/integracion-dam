@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import './styleListApartments.css'
 import imagenes from "./data/imagenes"
 import Form from 'react-bootstrap/Form';
+import uniqid from 'uniqid';
 
 const ListApartments = () => {
 
@@ -94,7 +95,7 @@ const ListApartments = () => {
             <div style={{ height: '100%', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '20px', padding: '15px', justifyContent: 'center' }}>
                 {apartment.map((item) => {
                     return (
-                        <div className="listApartmentText">
+                        <div key={uniqid()} className="listApartmentText">
                             <Link to={`/apartamentos/${item._id}`} style={{ textDecoration: 'none', cursor: 'pointer', color: 'black', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                                 <Apartment foto={imagenes[item._id]} info={item} />
                             </Link>

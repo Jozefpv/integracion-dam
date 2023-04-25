@@ -4,6 +4,7 @@ import Conocenos from "./components/Conocenos/conocenos";
 import Apartamentos from "./components/Apartamentos/Apartamentos";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ApartmentDetail from "./components/Apartamentos/ApartmentDetail";
+import Cancelar from "./components/Cancelar/Cancelar";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/apartamentos" element={<Apartamentos/>}/>
           <Route path="/apartamentos/:id" element={<ApartmentDetail/>}/>
           <Route path="/conocenos" element={<Conocenos/>}/>
+          <Route path="/cancelar/:id" element={<Cancelar/>}/>
         </Routes>
       </main>
     </Router>

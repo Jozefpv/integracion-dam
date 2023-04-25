@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const reservaSchema = new Schema({
-    id_reserva: { type: Number, required: true },
+    id_reserva: { type: String, required: true },
     fecha_inicio: { type: Date, required: true },
     fecha_fin: { type: Date, required: true },
     cliente: {

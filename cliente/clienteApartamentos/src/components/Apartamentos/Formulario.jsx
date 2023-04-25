@@ -5,7 +5,8 @@ import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styletest.css'
 import emailjs from '@emailjs/browser';
-
+import { Link } from 'react-router-dom';
+import uniqid from 'uniqid';
 const Formulario = (props) => {
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -20,7 +21,7 @@ const Formulario = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {
-            id_reserva: 1,
+            id_reserva: uniqid(),
             fecha_inicio: fechaEntrada,
             fecha_fin: fechaSalida,
             cliente: {
@@ -49,6 +50,7 @@ const Formulario = (props) => {
 
             const templateParams = {
                 email: email,
+                codigoReserva: data.id_reserva,
                 apartamento: props.apartamento,
                 fecha_entrada: fechaEntrada.toLocaleDateString(),
                 fecha_salida: fechaSalida.toLocaleDateString(),
@@ -75,7 +77,7 @@ const Formulario = (props) => {
     }
 
     return (
-        <Form style={{ width: '40%' }} onSubmit={handleSubmit}>
+        <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicNombre">
                 <Form.Label>Nombre:</Form.Label>
                 <Form.Control required type="text" placeholder="Nombre..." value={nombre} onChange={(event) => setNombre(event.target.value)} />
@@ -120,9 +122,14 @@ const Formulario = (props) => {
                     placeholderText="Selecciona una fecha"
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">
-                Reservar
-            </Button>
+            <div style={{ display: "flex", gap:"20px" }}>
+                <Button variant="primary" type="submit">
+                    Reservar
+                </Button>
+                <Link  to={`/cancelar/${props.id}`}>
+                    Cancelar mis reservas
+                </Link>
+            </div>
         </Form>
 
     )

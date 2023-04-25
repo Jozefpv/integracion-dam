@@ -82,7 +82,7 @@ const ListApartments = () => {
       }
 
     return (
-        <div style={{ backgroundColor: '#f4fafc' }}>
+        <div style={{ backgroundColor: '#f4fafc', display:"flex", flexDirection:"column", justifyContent:"center" }}>
             <div style={{ padding: "15px", width: "100%", display: "flex", justifyContent: "end" }}>
                 <Form.Select aria-label="Default select example" style={{ width: "200px"}} onChange={handleChangeValue}>
                     <option>Ordenador por...</option>
@@ -92,7 +92,7 @@ const ListApartments = () => {
                     <option value="4">Menos gustadas</option>
                 </Form.Select>
             </div>
-            <div style={{ height: '100%', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '20px', padding: '15px', justifyContent: 'center' }}>
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '20px', padding: '15px', justifyContent: 'center', maxWidth:"1300px", alignSelf:"center" }}>
                 {apartment.map((item) => {
                     return (
                         <div key={uniqid()} className="listApartmentText">

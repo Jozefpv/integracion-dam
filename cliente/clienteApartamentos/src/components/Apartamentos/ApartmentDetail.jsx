@@ -8,6 +8,8 @@ import { MdLocationOn } from 'react-icons/md';
 import { FaUser } from 'react-icons/fa';
 import { MdNightlight } from 'react-icons/md';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const ApartmentDetail = () => {
     const [informacion, setInformacion] = useState()
@@ -81,8 +83,8 @@ const ApartmentDetail = () => {
     return (
         <div style={{ padding: '3%' }}>
             {informacion && (
-                <div>
-                    <div style={{ display: 'flex', gap: '100px' }}>
+                <Row>
+                    <Col sm={12} md={6} lg={6}>
                         <div style={{ display: 'flex', flexDirection: 'column' }} className="carruselContainer">
                             <Carousel activeIndex={index} onSelect={handleSelect}>
                                 {imagenesDetail[id].map((imagen, i) => (
@@ -106,15 +108,14 @@ const ApartmentDetail = () => {
 
                             </div>
                         </div>
-                        <div style={{display:"flex", flexDirection:"column", width:"100%"}}>
-                            <h3 style={{textAlign:"left"}}>Haz tu reserva</h3>
+                    </Col>
+                    <Col sm={12} md={6} lg={6}>
+                        <div style={{ display: "flex", flexDirection: "column", width: "100%"}}>
+                            <h3 style={{ textAlign: "left" }}>Haz tu reserva</h3>
                             <Formulario id={id} fechas={fechas} apartamento={informacion.nombre} />
                         </div>
-                    </div>
-                    <div style={{ width: "100%" }}>
-                        <h5 style={{ textAlign: "center" }}>posibles reseñas</h5>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             )}
         </div>
     )

@@ -32,6 +32,22 @@ router.get('/apartamentos/:id', async (req, res) => {
     }
 })
 
+router.post('/cancelar/:id', async (req, res) => {
+    try {
+        const apartamento = await Apartamento.findById(req.params.id).populate('reservas')
+        const reserva = apartamento.reservas.find(r => r.id_reserva === req.body.id_reserva)
+        if (!reserva) {
+          res.status(404).json({ mensaje: 'La reserva no existe para este apartamento' })
+          return
+        }
+        res.status(200).json(reserva)
+      } catch (error) {
+        res.status(500).json({ mensaje: 'Error al buscar la reserva' })
+      }
+
+})
+
+
 router.post('/', async (req, res) => {
     const apartamentos = new Apartamento({
         nombre: req.body.nombre,
@@ -90,7 +106,7 @@ router.post('/apartamentos/:id/reservas', async (req, res) => {
         await reserva.save()
         await apartamento.save()
         
-        res.status(200).json({ mensaje: 'reservado' })
+        res.status(200).json({ mensaje: 'reservado'})
     } catch (error) {
         console.error(error)
         res.status(500).json({ mensaje: 'Error al crear la reserva' })

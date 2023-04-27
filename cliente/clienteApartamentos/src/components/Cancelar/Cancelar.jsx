@@ -16,7 +16,7 @@ function Cancelar() {
         }
 
         
-        console.log("id del apartamento", id)
+        console.log("id del aparta", id)
         console.log(data)
     }
 

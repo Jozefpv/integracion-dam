@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "starting": "node ./src/index.js",
     "start": "nodemon ./src/index.js",
     "updateLikes": "node ./src/updateLikes.js"
   },

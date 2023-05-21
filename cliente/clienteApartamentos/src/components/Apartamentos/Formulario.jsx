@@ -8,6 +8,7 @@ import emailjs from '@emailjs/browser';
 import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 const Formulario = (props) => {
+    const [loading, setLoading] = useState(false)
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [email, setEmail] = useState('');
@@ -19,6 +20,7 @@ const Formulario = (props) => {
     props.fechas.map(item => excludeDates.push(new Date(item)))
 
     const handleSubmit = async (event) => {
+        setLoading(true)
         event.preventDefault();
         const data = {
             id_reserva: uniqid(),
@@ -70,69 +72,74 @@ const Formulario = (props) => {
             setTelefono('')
             setFechaEntrada(null)
             setFechaSalida(null)
-
+            setLoading(false)
         } catch (error) {
             console.error(error);
         }
     }
 
     return (
-        <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicNombre">
-                <Form.Label>Nombre:</Form.Label>
-                <Form.Control required type="text" placeholder="Nombre..." value={nombre} onChange={(event) => setNombre(event.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicApellidos">
-                <Form.Label>Apellidos:</Form.Label>
-                <Form.Control required type="text" placeholder="Apellidos..." value={apellidos} onChange={(event) => setApellidos(event.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email:</Form.Label>
-                <Form.Control required type="email" placeholder="Email..." value={email} onChange={(event) => setEmail(event.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicTelefono">
-                <Form.Label>Teléfono:</Form.Label>
-                <Form.Control required type="text" placeholder="Teléfono..." value={telefono} onChange={(event) => setTelefono(event.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicFechaEntrada">
-                <Form.Label>Fecha de entrada:</Form.Label>
-                <DatePicker
-                    className='testform'
-                    selected={fechaEntrada}
-                    onChange={e => setFechaEntrada(e)}
-                    selectsStart
-                    startDate={fechaEntrada}
-                    endDate={fechaSalida}
-                    excludeDates={excludeDates}
-                    dateFormat="dd/MM/yyyy"
-                    placeholderText="Selecciona una fecha"
-                />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicFechaSalida">
-                <Form.Label>Fecha de salida:</Form.Label>
-                <DatePicker
-                    className='testform'
-                    selected={fechaSalida}
-                    onChange={e => setFechaSalida(e)}
-                    selectsEnd
-                    startDate={fechaEntrada}
-                    endDate={fechaSalida}
-                    excludeDates={excludeDates}
-                    dateFormat="dd/MM/yyyy"
-                    placeholderText="Selecciona una fecha"
-                />
-            </Form.Group>
-            <div style={{ display: "flex", gap:"20px" }}>
-                <Button variant="primary" type="submit">
-                    Reservar
-                </Button>
-                <Link  to={`/cancelar/${props.id}`}>
-                    Cancelar mis reservas
-                </Link>
-            </div>
-        </Form>
-
-    )
+        <>
+            {loading ? (
+                <p>Cargando...</p>
+            ) : (
+                <Form style={{ width: '50%' }} onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicNombre">
+                        <Form.Label>Nombre:</Form.Label>
+                        <Form.Control required type="text" placeholder="Nombre..." value={nombre} onChange={(event) => setNombre(event.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicApellidos">
+                        <Form.Label>Apellidos:</Form.Label>
+                        <Form.Control required type="text" placeholder="Apellidos..." value={apellidos} onChange={(event) => setApellidos(event.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email:</Form.Label>
+                        <Form.Control required type="email" placeholder="Email..." value={email} onChange={(event) => setEmail(event.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicTelefono">
+                        <Form.Label>Teléfono:</Form.Label>
+                        <Form.Control required type="text" placeholder="Teléfono..." value={telefono} onChange={(event) => setTelefono(event.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicFechaEntrada">
+                        <Form.Label>Fecha de entrada:</Form.Label>
+                        <DatePicker
+                            className='testform'
+                            selected={fechaEntrada}
+                            onChange={e => setFechaEntrada(e)}
+                            selectsStart
+                            startDate={fechaEntrada}
+                            endDate={fechaSalida}
+                            excludeDates={excludeDates}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="Selecciona una fecha"
+                        />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicFechaSalida">
+                        <Form.Label>Fecha de salida:</Form.Label>
+                        <DatePicker
+                            className='testform'
+                            selected={fechaSalida}
+                            onChange={e => setFechaSalida(e)}
+                            selectsEnd
+                            startDate={fechaEntrada}
+                            endDate={fechaSalida}
+                            excludeDates={excludeDates}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="Selecciona una fecha"
+                        />
+                    </Form.Group>
+                    <div style={{ display: "flex", gap: "20px" }}>
+                        <Button variant="primary" type="submit">
+                            Reservar
+                        </Button>
+                        <Link to={`/cancelar/${props.id}`}>
+                            Cancelar mis reservas
+                        </Link>
+                    </div>
+                </Form>
+            )}
+        </>
+    );
 }
 
 export default Formulario

@@ -16,7 +16,7 @@ const ReservaDetail = (props) => {
     const handleCancelar = async () => {
         try {
             const data = {
-                id_reserva : props.codigo
+                id_reserva : props.codigo.trim()
             }
             const response = await fetch(
                 `http://localhost:3003/cancelar/done/${id}`,

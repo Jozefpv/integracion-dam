@@ -16,6 +16,7 @@ const Formulario = (props) => {
     const [fechaEntrada, setFechaEntrada] = useState(null);
     const [fechaSalida, setFechaSalida] = useState(null);
 
+
     const excludeDates = []
     props.fechas.map(item => excludeDates.push(new Date(item)))
 
@@ -64,7 +65,7 @@ const Formulario = (props) => {
                 templateParams,
                 'sM-duookX9T8Am2ll'
             );
-            console.log(emailjsResponse)
+
 
             setNombre('')
             setApellidos('')
@@ -73,10 +74,15 @@ const Formulario = (props) => {
             setFechaEntrada(null)
             setFechaSalida(null)
             setLoading(false)
+
+            alert("Reserva realizada con éxito")
+
         } catch (error) {
             console.error(error);
         }
     }
+
+
 
     return (
         <>

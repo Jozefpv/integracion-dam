@@ -3,8 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const ImageSection = () => {
     return (
-        <div style={{height:"100%", display:"flex", alignContent:"center", justifyContent:"center", alignItems:"center"}}>
-            <img src={mapa} style={{width:"550px", borderRadius:"10px", border:"2px solid white"}}/>
+        <div style={{height:"100%", display:"flex", alignContent:"center", justifyContent:"flex-end", alignItems:"center"}}>
+            <img src={mapa} style={{maxWidth:"550px", borderRadius:"10px", border:"2px solid white"}}/>
         </div>
         // <MapContainer center={[28.6731, -17.8558]} zoom={12} style={{ border:"2px solid white",height: "100%", borderRadius:"10px" }}>
         //     <TileLayer

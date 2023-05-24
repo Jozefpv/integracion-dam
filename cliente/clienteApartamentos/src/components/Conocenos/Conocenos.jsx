@@ -1,4 +1,4 @@
-import mapa from './images/volcan.jpg'
+import paisaje from './images/paisaje.png'
 const Conocenos = () => {
     return (
         <div style={{display:"flex"}}>
@@ -10,8 +10,8 @@ const Conocenos = () => {
                 <h2>Nuestra comunidad local</h2>
                 <p>Valoramos y respetamos profundamente a la comunidad local de La Palma. Nos esforzamos por fomentar relaciones sólidas con los habitantes de la isla y apoyar a las empresas locales. Al elegir alojarte en una de nuestras casas rurales, no solo te sumerges en la cultura local, sino que también contribuyes directamente al desarrollo sostenible de la comunidad y al bienestar de sus habitantes.</p>
             </div>
-            <div style={{width:"50%"}}>
-                <img src={mapa} style={{ maxWidth: "550px", borderRadius: "10px", border: "2px solid white" }} />
+            <div style={{width:"50%", display:"flex", alignItems:"center", justifyContent:"center"}}>
+                <img src={paisaje} style={{ maxWidth: "550px", maxHeight: "300px", borderRadius: "10px", border: "2px solid white" }} />
             </div>
         </div>
     )

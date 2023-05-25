@@ -2,8 +2,7 @@
 Asegúrate de tener instalado Node.js en tu equipo. Puedes descargarlo e instalarlo desde el sitio web oficial de Node.js: https://nodejs.org
 
 2- Clonar el repositorio:
-Accede al repositorio de tu página web y haz clic en el botón "Clone" o "Descargar" para obtener una copia del proyecto en tu computadora.
-Guarda el proyecto en una ubicación conveniente en tu disco duro.
+Accede al repositorio de tu página web y haz clic en el botón "Clone" o "Descargar" para obtener una copia del proyecto en tu equipo.
 
 3- Instalación de dependencias:
 Abre una terminal o línea de comandos y navega hasta el directorio raíz del proyecto clonado.
